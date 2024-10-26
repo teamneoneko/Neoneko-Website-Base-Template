@@ -132,7 +132,6 @@
 }
 
 /* Responsive Design */
-
 @media screen and (max-width: 1280px) {
     .wiki-container {
         max-width: 800px;
@@ -169,5 +168,23 @@
     .wiki-content {
         min-width: 100%;
         max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wiki-container {
+        padding: 0.5rem;
+    }
+
+    .wiki-search input {
+        padding: 0.6rem;
+    }
+
+    .faq-question {
+        padding: 0.8rem;
+    }
+
+    .wiki-content h2 {
+        font-size: 1.5rem;
     }
 }
