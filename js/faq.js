@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 categoryFAQs.forEach(faq => {
                     const faqItem = document.createElement('div');
                     faqItem.className = 'faq-item';
+                    // Store keywords as comma-separated string
+                    faqItem.dataset.keywords = faq.keywords.join(',');
                     
                     const question = document.createElement('h3');
                     question.className = 'faq-question';
@@ -122,21 +124,29 @@ document.addEventListener('DOMContentLoaded', () => {
             let visibleItems = 0;
             
             faqItems.forEach(item => {
+                // Get keywords as array directly
+                const keywords = item.dataset.keywords ? item.dataset.keywords.split(',') : [];
                 const text = item.textContent.toLowerCase();
-                const isVisible = text.includes(searchTerm);
+                
+                const matchesText = text.includes(searchTerm);
+                const matchesKeywords = keywords.some(keyword => 
+                    keyword.toLowerCase().includes(searchTerm)
+                );
+                
+                const isVisible = matchesText || matchesKeywords;
                 item.style.display = isVisible ? 'block' : 'none';
                 if (isVisible) visibleItems++;
             });
             
-            // Hide the entire section if no items are visible
             section.style.display = visibleItems > 0 ? 'block' : 'none';
             
-            // Hide/show the corresponding sidebar link
             const categoryId = section.id;
             const sidebarLink = document.querySelector(`.wiki-nav a[href="#${categoryId}"]`);
             if (sidebarLink) {
                 sidebarLink.style.display = visibleItems > 0 ? 'block' : 'none';
             }
         });
-    });   
+    });
+    
 });
+    
