@@ -4,6 +4,7 @@
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 2rem;
 }
 
 .wiki-sidebar {
@@ -13,6 +14,8 @@
     height: fit-content;
     position: sticky;
     top: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .wiki-search input {
@@ -23,6 +26,7 @@
     background: var(--background-color);
     color: var(--text-color);
     margin-bottom: 1.5rem;
+    box-sizing: border-box;
 }
 
 .wiki-nav a {
@@ -32,26 +36,64 @@
     text-decoration: none;
     border-radius: 4px;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .wiki-nav a:hover {
     background: var(--menu-hover-background);
     transform: translateX(5px);
+    color: var(--link-color);
 }
 
 .wiki-content {
     background: var(--header-background);
     border-radius: 8px;
     padding: 2rem;
+    min-width: 800px;
+    max-width: 800px;
+    width: 100%;
 }
 
 .faq-item {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
 }
 
+.faq-question {
+    cursor: pointer;
+    padding: 1.2rem;
+    margin: 0;
+    background: var(--background-color);
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.faq-question:hover {
+    background: var(--menu-hover-background);
+    color: var(--link-color);
+}
+
+.toggle-icon {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--link-color);
+}
+
 .faq-content {
-    padding: 1rem 0;
+    padding: 1.5rem;
+    line-height: 1.6;
+    background: var(--background-color);
+    border-radius: 0 0 4px 4px;
+    margin-top: 2px;
+}
+
+.faq-content.hidden {
+    display: none;
 }
 
 .faq-content img {
@@ -70,6 +112,7 @@
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .faq-content a:hover {
@@ -77,14 +120,28 @@
     color: var(--link-hover-color);
 }
 
+.wiki-content h2 {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--link-color);
+    font-size: 1.8rem;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
     .wiki-container {
         grid-template-columns: 1fr;
+        padding: 1rem;
     }
     
     .wiki-sidebar {
         position: relative;
         top: 0;
+    }
+
+    .wiki-content {
+        min-width: 100%;
+        max-width: 100%;
     }
 }

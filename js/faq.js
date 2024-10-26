@@ -5,22 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('faqSearch');
     const categoriesList = document.getElementById('categoriesList');
 
-    // Enhanced fetch with better error handling
     async function fetchFAQData() {
         try {
             const [faqResponse, categoriesResponse] = await Promise.all([
                 fetch('./data/faq.json'),
                 fetch('./data/categories.json')
             ]);
-
+    
             if (!faqResponse.ok || !categoriesResponse.ok) {
                 throw new Error('Network response was not ok');
             }
-
+    
             const faqData = await faqResponse.json();
             const categoriesData = await categoriesResponse.json();
-
-            return { faqData, categoriesData };
+    
+            return { 
+                faqData: faqData.faqs, 
+                categoriesData: categoriesData.categories 
+            };
         } catch (error) {
             throw new Error('Failed to fetch FAQ data');
         }
@@ -29,36 +31,61 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render FAQ content with enhanced formatting
     function renderFAQ(faqData, categoriesData) {
         loadingDiv.style.display = 'none';
-        
-        // Ensure we're working with arrays
-        const categories = Array.isArray(categoriesData) ? categoriesData : [];
-        const faqs = Array.isArray(faqData) ? faqData : [];
+        faqContainer.innerHTML = '';
         
         // Render categories in sidebar
-        categories.forEach(category => {
+        categoriesData.forEach(category => {
             const categoryLink = document.createElement('a');
             categoryLink.href = `#${category.toLowerCase().replace(/\s+/g, '-')}`;
             categoryLink.textContent = category;
             categoriesList.appendChild(categoryLink);
         });
-
-        // Render FAQ content
-        categories.forEach(category => {
-            const categoryFAQs = faqs.filter(faq => faq.category === category);
+    
+        // Render FAQ content by category
+        categoriesData.forEach(category => {
+            const categoryFAQs = faqData.filter(faq => faq.category === category);
+            
             if (categoryFAQs.length > 0) {
                 const section = document.createElement('section');
                 section.id = category.toLowerCase().replace(/\s+/g, '-');
-                section.innerHTML = `
-                    <h2>${category}</h2>
-                    ${categoryFAQs.map(faq => `
-                        <div class="faq-item">
-                            <h3>${faq.question}</h3>
-                            <div class="faq-content">
-                                ${formatContent(faq.answer)}
-                            </div>
-                        </div>
-                    `).join('')}
-                `;
+                
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.textContent = category;
+                section.appendChild(categoryTitle);
+    
+                categoryFAQs.forEach(faq => {
+                    const faqItem = document.createElement('div');
+                    faqItem.className = 'faq-item';
+                    
+                    const question = document.createElement('h3');
+                    question.className = 'faq-question';
+                    question.innerHTML = `${faq.question} <span class="toggle-icon">+</span>`;
+                    
+                    const answer = document.createElement('div');
+                    answer.className = 'faq-content hidden'; // Added hidden class by default
+                    answer.innerHTML = formatContent(faq.answer);
+                    
+                    question.addEventListener('click', () => {
+                        const wasHidden = answer.classList.contains('hidden');
+                        
+                        // Close all other answers first
+                        document.querySelectorAll('.faq-content').forEach(content => {
+                            content.classList.add('hidden');
+                            content.previousElementSibling.querySelector('.toggle-icon').textContent = '+';
+                        });
+                        
+                        // Toggle current answer
+                        if (wasHidden) {
+                            answer.classList.remove('hidden');
+                            question.querySelector('.toggle-icon').textContent = '-';
+                        }
+                    });
+                    
+                    faqItem.appendChild(question);
+                    faqItem.appendChild(answer);
+                    section.appendChild(faqItem);
+                });
+    
                 faqContainer.appendChild(section);
             }
         });
@@ -88,11 +115,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search functionality
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
-        const faqItems = document.querySelectorAll('.faq-item');
+        const sections = document.querySelectorAll('.wiki-content section');
         
-        faqItems.forEach(item => {
-            const text = item.textContent.toLowerCase();
-            item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+        sections.forEach(section => {
+            const faqItems = section.querySelectorAll('.faq-item');
+            let visibleItems = 0;
+            
+            faqItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const isVisible = text.includes(searchTerm);
+                item.style.display = isVisible ? 'block' : 'none';
+                if (isVisible) visibleItems++;
+            });
+            
+            // Hide the entire section if no items are visible
+            section.style.display = visibleItems > 0 ? 'block' : 'none';
+            
+            // Hide/show the corresponding sidebar link
+            const categoryId = section.id;
+            const sidebarLink = document.querySelector(`.wiki-nav a[href="#${categoryId}"]`);
+            if (sidebarLink) {
+                sidebarLink.style.display = visibleItems > 0 ? 'block' : 'none';
+            }
         });
-    });
+    });   
 });
