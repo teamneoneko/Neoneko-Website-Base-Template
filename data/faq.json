@@ -1,0 +1,30 @@
+{
+    "faqs": [
+      {
+        "id": 1,
+        "category": "Getting Started",
+        "question": "Example 1",
+        "answer": "This is Example 1"
+      },
+      {
+        "id": 2,
+        "category": "Getting Started", 
+        "question": "Example 2", 
+        "answer": "This is Example 2"
+      },
+      {
+        "id": 3,
+        "category": "Troubleshooting",
+        "question": "Example 3",
+        "answer": "This is Example 3"
+      },
+      {
+        "id": 4,
+        "category": "Features",
+        "question": "Example 4",
+        "answer": "This is Example 4"
+      }
+    ]
+  }
+
+  
