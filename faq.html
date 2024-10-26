@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/faq.css">
+    <link rel="stylesheet" href="css/markdown.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/mobile-menu.js" defer></script>
     <script src="js/theme-selector.js" defer></script>
@@ -67,6 +68,13 @@
                 <div id="error-container" style="display: none;">
                     <p id="errorMessage"></p>
                     <button id="retryButton">Retry</button>
+                </div>
+                <div id="version-history" class="version-history-modal" style="display: none;">
+                    <div class="modal-content">
+                        <h3>Version History</h3>
+                        <div id="history-content"></div>
+                        <button class="close-modal">Close</button>
+                    </div>
                 </div>
                 <div id="faq-container"></div>
             </div>
