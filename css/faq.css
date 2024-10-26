@@ -1,0 +1,90 @@
+.wiki-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wiki-sidebar {
+    background: var(--header-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.wiki-search input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.wiki-nav a {
+    display: block;
+    padding: 0.8rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.wiki-nav a:hover {
+    background: var(--menu-hover-background);
+    transform: translateX(5px);
+}
+
+.wiki-content {
+    background: var(--header-background);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.faq-item {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-content {
+    padding: 1rem 0;
+}
+
+.faq-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.faq-content p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.faq-content a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.faq-content a:hover {
+    border-bottom-color: var(--link-color);
+    color: var(--link-hover-color);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .wiki-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .wiki-sidebar {
+        position: relative;
+        top: 0;
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neoneko Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <script src="js/mobile-menu.js" defer></script>
+    <script src="js/theme-selector.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo-link">
+                <img src="https://neoneko.xyz/images/logo.jpg" alt="Neoneko Logo" class="logo-image">
+                <div class="logo">Neoneko</div>
+            </a>
+            <ul class="menu">
+                <li><a href="#" class="active">Home</a></li>
+                <li class="has-submenu">
+                    <a href="#">Products</a>
+                    <ul class="submenu">
+                        <li><a href="#">Product 1</a></li>
+                        <li><a href="#">Product 2</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <select id="theme-select" aria-label="Theme Selector">
+                <option value="default" data-theme="default">Default Theme</option>
+                <option value="light" data-theme="light">Light Theme</option>
+                <option value="dark" data-theme="dark">Dark Theme</option>
+            </select>
+            <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Menu">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Content goes here -->
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <p class="footer-text">
+                Cats Blender Plugin Unofficial and Avatar Toolkit are licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3 License</a>.<br>
+                Blender is a registered trademark of the <a href="https://www.blender.org/about/foundation/">Blender Foundation</a>.<br>
+                Neoneko is not affiliated with the Blender Foundation.<br>
+                Copyright © 2024 <a href="https://neoneko.xyz">Neoneko</a>. All rights reserved.
+            </p>            
+        </div>
+    </footer>
+</body>
+</html>
