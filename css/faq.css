@@ -3,8 +3,10 @@
     grid-template-columns: 280px 1fr;
     gap: 2rem;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem;
+    justify-content: center;
+    margin-left: -170px;
 }
 
 .wiki-sidebar {
@@ -52,6 +54,7 @@
     min-width: 800px;
     max-width: 800px;
     width: 100%;
+    margin: 0 auto;
 }
 
 .faq-item {
@@ -129,15 +132,38 @@
 }
 
 /* Responsive Design */
-@media screen and (max-width: 1024px) {
+
+@media screen and (max-width: 1280px) {
     .wiki-container {
-        grid-template-columns: 1fr;
-        padding: 1rem;
+        max-width: 800px;
+        margin-left: -170px;
     }
     
     .wiki-sidebar {
         position: relative;
         top: 0;
+        max-width: 750px;
+    }
+
+    .wiki-content {
+        min-width: 150%;
+        max-width: 150%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .wiki-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        max-width: 800px;
+        margin-left: -0px;
+    }
+    
+    .wiki-sidebar {
+        position: relative;
+        top: 0;
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     .wiki-content {
