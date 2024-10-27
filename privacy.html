@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Neoneko</title>
+    <title>Privacy Policy - Neoneko</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet" href="css/faq.css">
     <link rel="stylesheet" href="css/markdown.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/mobile-menu.js" defer></script>
     <script src="js/theme-selector.js" defer></script>
-    <script src="js/faq.js" defer></script>
 </head>
 <body>
     <header>
@@ -39,7 +36,7 @@
                         <li><a href="https://discord.neoneko.xyz/">Discord</a></li>
                         <li><a href="https://bsky.app/profile/neoneko.xyz">Bluesky</a></li>
                     </ul>
-                <li><a href="faq.html" class="active">FAQ</a></li>
+                <li><a href="faq.html">FAQ</a></li>
             </ul>
             <div class="theme-hint">
                 <select id="theme-select" aria-label="Theme Selector">
@@ -56,35 +53,70 @@
             <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Menu">☰</button>
         </nav>
     </header>
-    
+
     <main>
-        <div class="wiki-container">
-            <aside class="wiki-sidebar">
-                <div class="wiki-search">
-                    <input type="text" placeholder="Search FAQ..." id="faqSearch">
-                </div>
-                <nav class="wiki-nav">
-                    <div id="categoriesList"></div>
-                </nav>
-            </aside>
-            <div class="wiki-content">
-                <div id="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    Loading FAQ...
-                </div>
-                <div id="error-container" style="display: none;">
-                    <p id="errorMessage"></p>
-                    <button id="retryButton">Retry</button>
-                </div>
-                <div id="version-history" class="version-history-modal" style="display: none;">
-                    <div class="modal-content">
-                        <h3>Version History</h3>
-                        <div id="history-content"></div>
-                        <button class="close-modal">Close</button>
-                    </div>
-                </div>
-                <div id="faq-container"></div>
-            </div>
+        <div class="standard-container">
+            <h1>Privacy Policy</h1>
+            <p><strong>Last Updated: October 27th, 2024</strong></p>
+
+            <section>
+                <h2>Overview</h2>
+                <p>This Privacy Policy outlines how Neoneko ("we", "us", or "our") handles information when you use our websites (neoneko.xyz, catsblenderplugin.xyz, and avatartoolkit.xyz) and services. We prioritize your privacy and maintain full transparency in our data practices.</p>
+            </section>
+
+            <section>
+                <h2>Information Collection</h2>
+                <p>We minimize data collection and only gather essential information:</p>
+                <ul>
+                    <li><strong>IP Address:</strong> Logged by our web server and CDN for security and operational purposes</li>
+                    <li><strong>Browser Information:</strong> Basic details about your browser and operating system to optimize website performance</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Browser Storage</h2>
+                <p>We use local storage exclusively for:</p>
+                <ul>
+                    <li>Storing your theme preferences</li>
+                    <li>Improving your browsing experience</li>
+                </ul>
+                <p>This data remains on your device and isn't transmitted to our servers.</p>
+            </section>
+
+            <section>
+                <h2>Content Delivery Network</h2>
+                <p>We utilize Bunny CDN to deliver content efficiently. Their services may collect standard technical data for operational purposes. For detailed information, please refer to <a href="https://bunny.net/privacy/">Bunny CDN's privacy policy</a>.</p>
+            </section>
+
+            <section>
+                <h2>Data Usage & Sharing</h2>
+                <p>We:</p>
+                <ul>
+                    <li>Never sell or trade your information</li>
+                    <li>Only use collected data for website functionality and security</li>
+                    <li>Share data only with essential service providers (like our CDN)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Request information about any data we might have</li>
+                    <li>Clear local storage through your browser settings</li>
+                    <li>Additional rights under GDPR if you're in the EEA</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Updates to This Policy</h2>
+                <p>We may update this policy periodically. Changes will be posted here with an updated revision date.</p>
+            </section>
+
+            <section>
+                <h2>Contact Information</h2>
+                <p>For privacy-related inquiries, please contact us at: <a href="mailto:hello@yusarina.xyz">hello@yusarina.xyz</a></p>
+            </section>
         </div>
     </main>
 
