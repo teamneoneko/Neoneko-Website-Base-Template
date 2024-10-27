@@ -9,27 +9,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch FAQ and categories data
     async function fetchFAQData() {
         try {
-            const [faqResponse, categoriesResponse] = await Promise.all([
-                fetch('./data/faq.json'),
-                fetch('./data/categories.json')
-            ]);
-    
-            if (!faqResponse.ok || !categoriesResponse.ok) {
-                throw new Error('Network response was not ok');
+            const categoriesResponse = await fetch('./data/categories.json');
+            if (!categoriesResponse.ok) {
+                throw new Error('Failed to fetch categories');
             }
-    
-            const faqData = await faqResponse.json();
+            
             const categoriesData = await categoriesResponse.json();
+            const categories = categoriesData.categories;
+            
+            // Fetch all category FAQ files in parallel
+            const faqPromises = categories.map(category => {
+                const fileName = category.toLowerCase().replace(/\s+/g, '-');
+                return fetch(`./data/faq/${fileName}.json`)
+                    .then(response => response.json())
+                    .catch(error => {
+                        console.warn(`Failed to load ${fileName}.json:`, error);
+                        return { faqs: [] };
+                    });
+            });
     
-            return { 
-                faqData: faqData.faqs, 
-                categoriesData: categoriesData.categories 
+            const faqResults = await Promise.all(faqPromises);
+            
+            // Combine all FAQs into one array
+            const combinedFaqs = faqResults.reduce((acc, result) => {
+                return acc.concat(result.faqs);
+            }, []);
+    
+            return {
+                faqData: combinedFaqs,
+                categoriesData: categories
             };
         } catch (error) {
             throw new Error('Failed to fetch FAQ data');
         }
     }
-
+    
     // Render FAQ content with enhanced formatting
     function renderFAQ(faqData, categoriesData) {
         loadingDiv.style.display = 'none';
