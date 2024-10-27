@@ -95,6 +95,10 @@
     .mobile-menu {
         display: block;
     }
+
+    .theme-hint::after {
+        display: none;
+    }
     
     .mobile-menu a {
         display: block;
