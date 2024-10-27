@@ -19,11 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileThemeSelector.classList.add('mobile-theme-selector');
     mobileThemeSelector.innerHTML = `
         <select aria-label="Theme Selector">
-            <option value="default" data-theme="default">Default Theme</option>
+            <option value="main-site" data-theme="main-site">Main Site Theme</option>
+            <option value="halloween" data-theme="halloween">Halloween Theme</option>
             <option value="light" data-theme="light">Light Theme</option>
             <option value="dark" data-theme="dark">Dark Theme</option>
+            <option value="high-contrast" data-theme="high-contrast">High Contrast</option>
+            <option value="forest" data-theme="forest">Forest Theme</option>
+            <option value="mint" data-theme="mint">Mint Theme</option>
+            <option value="cyberpunk" data-theme="cyberpunk">Cyberpunk Theme</option>
         </select>
-    `;
+    `;    
     mobileMenu.appendChild(mobileThemeSelector);
     
     // Add to DOM
