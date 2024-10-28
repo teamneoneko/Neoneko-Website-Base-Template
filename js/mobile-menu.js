@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Event Listeners
     mobileMenuButton.addEventListener('click', () => {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
         mobileMenu.classList.add('open');
         document.body.style.overflow = 'hidden';
     });
@@ -43,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeButton.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
         document.body.style.overflow = '';
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
     });
     
     // Close menu when clicking outside
@@ -50,16 +53,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
             mobileMenu.classList.remove('open');
             document.body.style.overflow = '';
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
         }
     });
     
-    // Handle submenu toggles
-    const submenus = mobileMenu.querySelectorAll('.has-submenu');
+    // Handle submenu toggles with keyboard navigation
+    const submenus = document.querySelectorAll('.has-submenu > a');
     submenus.forEach(submenu => {
-        const link = submenu.querySelector('a');
-        link.addEventListener('click', (e) => {
+        submenu.addEventListener('click', (e) => {
             e.preventDefault();
-            submenu.classList.toggle('open');
+            const parent = submenu.parentElement;
+            parent.classList.toggle('open');
+            const isExpanded = submenu.getAttribute('aria-expanded') === 'true';
+            submenu.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        submenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const submenuList = submenu.nextElementSibling;
+                const isExpanded = submenu.getAttribute('aria-expanded') === 'true';
+                submenu.setAttribute('aria-expanded', !isExpanded);
+                submenuList.style.display = isExpanded ? 'none' : 'block';
+            }
         });
     });
 });

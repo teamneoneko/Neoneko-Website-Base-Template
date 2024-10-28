@@ -65,6 +65,24 @@
     display: block;
 }
 
+.mobile-menu .has-submenu .submenu {
+    visibility: visible;
+    opacity: 1;
+    position: static;
+    transition: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+.mobile-menu .menu .has-submenu .submenu {
+    display: none;
+}
+
+.mobile-menu .menu .has-submenu.open .submenu {
+    display: block;
+}
+
+
 /* Responsive Breakpoints */
 @media screen and (max-width: 1400px) {
     .logo {
@@ -73,9 +91,13 @@
     nav {
         padding: 0 2rem;
     }
+
+    #theme-select {
+        right: -20px;
+    }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
     .menu {
         display: none;
     }
@@ -125,6 +147,31 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .footer-content {
+        padding: 0 1rem;
+    }
+    
+    .footer-menu {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .standard-container {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .logo {
         font-size: 1.5rem;
@@ -142,6 +189,11 @@
         flex-wrap: wrap;
         gap: 0.8rem;
     }
+
+    .standard-container {
+        max-width: 95%;
+        padding: 1.25rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -156,5 +208,12 @@
     
     .footer-text {
         font-size: 0.8rem;
+    }
+
+    .standard-container {
+        max-width: 96%;
+        padding: 1rem;
+        margin: 0.5rem;
+        border-radius: 4px;
     }
 }

@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of Service for Neoneko websites and tools. Understand our usage terms and conditions.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Terms of Service - Neoneko">
+    <meta property="og:description" content="Terms of Service for Neoneko websites and tools. Understand our usage terms and conditions.">
+    <meta property="og:image" content="https://neoneko.xyz/images/logo.jpg">
+    <meta property="og:url" content="https://neoneko.xyz/terms">
+    <meta property="og:type" content="website">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/common.css" as="style">
+    <link rel="preload" href="css/mobile.css" as="style">
+    <link rel="preload" href="css/markdown.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
+    
     <title>Terms of Service - Neoneko</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,36 +25,45 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/markdown.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="js/mobile-menu.js" defer></script>
     <script src="js/theme-selector.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo-link">
-                <img src="https://neoneko.xyz/images/logo.jpg" alt="Neoneko Logo" class="logo-image">
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="/" class="logo-link" aria-label="Neoneko Home">
+                <img src="https://neoneko.xyz/images/logo.jpg" alt="Neoneko Logo" class="logo-image" loading="lazy">
                 <div class="logo">Neoneko</div>
             </a>
-            <ul class="menu">
-                <li><a href="index.html">Home</a></li>
-                <li class="has-submenu">
-                    <a href="#">Projects</a>
-                    <ul class="submenu">
-                        <li><a href="https://catsblenderplugin.xyz">Cats Blender Plugin</a></li>
-                        <li><a href="https://avatartoolkit.xyz">Avatar Toolkit</a></li>
+            <ul class="menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li class="has-submenu" role="none">
+                    <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">Projects</a>
+                    <ul class="submenu" role="menu" aria-label="Projects">
+                        <li role="none"><a href="https://catsblenderplugin.xyz" role="menuitem">Cats Blender Plugin</a></li>
+                        <li role="none"><a href="https://avatartoolkit.xyz" role="menuitem">Avatar Toolkit</a></li>
                     </ul>
                 </li>
-                <li class="has-submenu">
-                    <a href="#">About</a>
-                    <ul class="submenu">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="https://discord.neoneko.xyz/">Discord</a></li>
-                        <li><a href="https://bsky.app/profile/neoneko.xyz">Bluesky</a></li>
+                <li class="has-submenu" role="none">
+                    <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">Community</a>
+                    <ul class="submenu" role="menu" aria-label="Community">
+                        <li role="none"><a href="https://discord.neoneko.xyz/" role="menuitem"><i class="fab fa-discord"></i> Discord</a></li>
+                        <li role="none"><a href="https://bsky.app/profile/neoneko.xyz" role="menuitem"><i class="fa-brands fa-bluesky"></i> Bluesky</a></li>
                     </ul>
-                <li><a href="faq.html">FAQ</a></li>
-            </ul>
+                </li>
+                <li class="has-submenu" role="none">
+                    <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">About</a>
+                    <ul class="submenu" role="menu" aria-label="About">
+                        <li role="none"><a href="#" role="menuitem">About Us</a></li>
+                        <li role="none"><a href="#" role="menuitem">Support Us</a></li>
+                        <li role="none"><a href="#" role="menuitem">Contact Us</a></li>
+                    </ul>
+                </li>
+                <li role="none"><a href="faq.html" role="menuitem">FAQ</a></li>
+            </ul>            
             <div class="theme-hint">
-                <select id="theme-select" aria-label="Theme Selector">
+                <select id="theme-select" aria-label="Theme Selector" role="combobox">
                     <option value="main-site" data-theme="main-site">Main Theme</option>
                     <option value="light" data-theme="light">Light Theme</option>
                     <option value="dark" data-theme="dark">Dark Theme</option>
@@ -50,11 +74,11 @@
                     <option value="halloween" data-theme="halloween">Halloween Theme</option>
                 </select>
             </div>
-            <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Menu">☰</button>
+            <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Toggle Navigation Menu" aria-expanded="false">☰</button>
         </nav>
     </header>
 
-    <main>
+    <main role="main">
         <div class="standard-container">
             <h1>Terms of Service</h1>
             <p><strong>Last Updated: October 27th, 2024</strong></p>
@@ -139,20 +163,32 @@
         </div>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-content">
-            <ul class="footer-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="https://catsblenderplugin.xyz">Cats Blender Plugin</a></li>
-                <li><a href="https://avatartoolkit.xyz">Avatar Toolkit</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="https://discord.neoneko.xyz/">Discord</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="https://bsky.app/profile/neoneko.xyz">Bluesky</a></li>
+            <ul class="footer-menu" role="menu">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li role="none"><a href="https://catsblenderplugin.xyz" role="menuitem">Cats Blender Plugin</a></li>
+                <li role="none"><a href="https://avatartoolkit.xyz" role="menuitem">Avatar Toolkit</a></li>
+                <li role="none"><a href="#" role="menuitem">About Us</a></li>
+                <li role="none"><a href="#" role="menuitem">Support Us</a></li>
+                <li role="none"><a href="#" role="menuitem">Contact Us</a></li>
+                <li role="none"><a href="faq.html" role="menuitem">FAQ</a></li>
             </ul>
-            <ul class="footer-menu">
-                <li><a href="privacy.html">Privacy Policy</a></li>
-                <li><a href="terms.html">Terms of Service</a></li>
+            <ul class="footer-menu" role="menu">
+                <li role="none"><a href="privacy.html" role="menuitem">Privacy Policy</a></li>
+                <li role="none"><a href="terms.html" role="menuitem">Terms of Service</a></li>
+            </ul>
+            <ul class="social-menu" role="menu">
+                <li role="none">
+                    <a href="https://discord.neoneko.xyz/" role="menuitem" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </li>
+                <li role="none">
+                    <a href="https://bsky.app/profile/neoneko.xyz" role="menuitem" aria-label="Bluesky">
+                        <i class="fa-brands fa-bluesky"></i>
+                    </a>
+                </li>
             </ul>
             <p class="footer-text">
                 Cats Blender Plugin Unofficial and Avatar Toolkit are licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3 License</a>.<br>
