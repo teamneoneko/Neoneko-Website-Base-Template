@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorContainer = document.getElementById('error-container');
     const searchInput = document.getElementById('faqSearch');
     const categoriesList = document.getElementById('categoriesList');
+    
+    // Global data storage
+    let faqData = [];
+    let categoriesData = [];
 
     // Fetch FAQ and categories data
     async function fetchFAQData() {
@@ -48,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderFAQ(faqData, categoriesData) {
         loadingDiv.style.display = 'none';
         faqContainer.innerHTML = '';
+        categoriesList.innerHTML = '';
         
         // Render categories in sidebar
         categoriesData.forEach(category => {
@@ -194,10 +199,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }   
 
     // Initialize
-    let faqData = [];
     fetchFAQData()
-        .then(({ faqData: data, categoriesData }) => {
+        .then(({ faqData: data, categoriesData: categories }) => {
             faqData = data;
+            categoriesData = categories;
             console.log('Data received:', { faqData, categoriesData });
             renderFAQ(faqData, categoriesData);
         })
@@ -211,35 +216,110 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const sections = document.querySelectorAll('.wiki-content section');
+        const faqContainer = document.getElementById('faq-container');
+        let totalVisibleItems = 0;
         
-        sections.forEach(section => {
-            const faqItems = section.querySelectorAll('.faq-item');
+        // If search is empty, show all content
+        if (!searchTerm) {
+            renderFAQ(faqData, categoriesData);
+            return;
+        }
+        
+        // Clear existing content and re-render sections
+        faqContainer.innerHTML = '';
+        categoriesData.forEach(category => {
+            const categoryFAQs = faqData.filter(faq => faq.category === category);
+            const section = document.createElement('section');
+            section.id = category.toLowerCase().replace(/\s+/g, '-');
+            section.className = 'markdown-content';
+            
+            const categoryTitle = document.createElement('h2');
+            categoryTitle.textContent = category;
+            section.appendChild(categoryTitle);
+            
             let visibleItems = 0;
             
-            faqItems.forEach(item => {
-                const keywords = item.dataset.keywords ? item.dataset.keywords.split(',') : [];
-                const text = item.textContent.toLowerCase();
+            // Check if category matches search term
+            const categoryMatches = category.toLowerCase().includes(searchTerm);
+            
+            categoryFAQs.forEach(faq => {
+                const text = `${faq.question} ${faq.answer}`.toLowerCase();
+                const keywords = faq.keywords || [];
                 
                 const matchesText = text.includes(searchTerm);
                 const matchesKeywords = keywords.some(keyword => 
                     keyword.toLowerCase().includes(searchTerm)
                 );
                 
-                const isVisible = matchesText || matchesKeywords;
-                item.style.display = isVisible ? 'block' : 'none';
-                if (isVisible) visibleItems++;
+                if (matchesText || matchesKeywords || categoryMatches) {
+                    visibleItems++;
+                    totalVisibleItems++;
+                    
+                    const faqItem = document.createElement('div');
+                    faqItem.className = 'faq-item';
+                    faqItem.dataset.keywords = faq.keywords.join(',');
+                    
+                    const question = document.createElement('h3');
+                    question.className = 'faq-question';
+                    question.innerHTML = `${faq.question} <span class="toggle-icon">+</span>`;
+                    
+                    const answer = document.createElement('div');
+                    answer.className = 'faq-content hidden markdown-content';
+                    const formattedContent = formatContent(faq.answer);
+                    
+                    const metadata = `
+                        <div class="faq-metadata">
+                            <button class="version-history-btn" data-faq-id="${faq.id}">
+                                <span class="version-badge">v${faq.version}</span>
+                                <span class="last-updated"><i class="fas fa-clock"></i> ${new Date(faq.lastUpdated).toLocaleDateString()}</span>
+                                <span class="history-icon"><i class="fas fa-history"></i></span>
+                            </button>
+                        </div>
+                    `;
+                    
+                    answer.innerHTML = formattedContent + metadata;
+                    
+                    question.addEventListener('click', () => {
+                        const wasHidden = answer.classList.contains('hidden');
+                        
+                        document.querySelectorAll('.faq-content').forEach(content => {
+                            content.classList.add('hidden');
+                            content.previousElementSibling.querySelector('.toggle-icon').textContent = '+';
+                        });
+                        
+                        if (wasHidden) {
+                            answer.classList.remove('hidden');
+                            question.querySelector('.toggle-icon').textContent = '-';
+                        }
+                    });
+                    
+                    faqItem.appendChild(question);
+                    faqItem.appendChild(answer);
+                    section.appendChild(faqItem);
+                }
             });
             
-            section.style.display = visibleItems > 0 ? 'block' : 'none';
+            if (visibleItems > 0 || categoryMatches) {
+                faqContainer.appendChild(section);
+            }
             
             const categoryId = section.id;
             const sidebarLink = document.querySelector(`.wiki-nav a[href="#${categoryId}"]`);
             if (sidebarLink) {
-                sidebarLink.style.display = visibleItems > 0 ? 'block' : 'none';
+                sidebarLink.style.display = (visibleItems > 0 || categoryMatches) ? 'block' : 'none';
             }
         });
+    
+        if (totalVisibleItems === 0) {
+            faqContainer.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <p>There are no results for this search. Please try again using different keywords.</p>
+                </div>
+            `;
+        }
     });
-
+        
     // Version history popup handler
     document.addEventListener('click', (e) => {
         if (e.target.closest('.version-history-btn')) {
